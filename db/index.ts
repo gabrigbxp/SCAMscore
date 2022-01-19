@@ -5,6 +5,6 @@ const pool = new Pool()
 export const query = (text: string, params: string[] = []) => pool.query(text, params)
 
 export const insert = (values: string[]) => pool.query({
-  text: "INSERT INTO public.score(domain, \"from\", \"to\", score) VALUES ($1, $2, $3, $4)",
+  text: "INSERT INTO public.score(domain, \"date\", score) VALUES ($1, $2, $3) RETURNING id",
   values
 })
