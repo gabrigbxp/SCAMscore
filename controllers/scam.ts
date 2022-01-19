@@ -1,9 +1,21 @@
-import { Request, Response } from "express"
+import { Request, Response, NextFunction } from "express"
 import { query, insert } from "../db";
 import { getScore as getScoreAPI } from "../scamadviser";
+import BusinessError from "../errors/BusinessError"
+import isValidDate from "../utils/validate_date";
 
-export const getScore = async (req: Request, res: Response) => {
+export const getScore = async (req: Request, res: Response, next: NextFunction) => {
   const { domain, from, to } = req.query
+
+  if (from && !isValidDate(from as string)) {
+    //errorUse on app.ts cath the exceptions
+    throw new BusinessError(400, "'from' field is invalid, should be a date with format YYYY-MM-DD")
+  }
+
+  if (to && !isValidDate(to as string)) {
+    return next(new BusinessError(400, "'to' field is invalid, should be a date with format YYYY-MM-DD"))
+  }
+
   const response = await getScoreAPI(domain)
   const now = new Date()
 
