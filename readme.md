@@ -17,4 +17,5 @@
 Import the file `score` to your database (already has information for testing)
 
 # Endpoint
-The endpoint is http://localhost:(SERVER PORT)/api?domain=(DOMAIN TO CHECK)&from=(DATE IN YYYY-MM-DD)&to=(DATE IN YYYY-MM-DD
+The endpoint is http://localhost:(SERVER PORT)/api?domain=(DOMAIN TO CHECK)&from=(DATE IN YYYY-MM-DD)&to=(DATE IN YYYY-MM-DD)
+`from` and `to` are optionals
